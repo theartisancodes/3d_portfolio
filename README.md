@@ -106,6 +106,3 @@ Contributions are welcome! If you have ideas for improvements or find bugs, feel
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
-## Acknowledgments
-
-Inspired by JS Mastery
