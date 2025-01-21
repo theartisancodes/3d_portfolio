@@ -11,7 +11,7 @@ export default [
   js.configs.recommended,
 
   {
-    ignores: ['dist'],
+    ignores: ['dist', '**/*.glb'],
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       parser: tsParser,
@@ -54,7 +54,8 @@ export default [
       eqeqeq: ['error', 'always'],
       'prefer-const': 'error',
       'no-var': 'error',
-      curly: ['error', 'multi-line']
+      curly: ['error', 'multi-line'],
+      'react/react-in-jsx-scope': 'off'
     },
     settings: {
       react: {

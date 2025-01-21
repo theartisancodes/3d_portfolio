@@ -1,13 +1,25 @@
-import { useRef, useEffect } from 'react';
+import { JSX, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
 import { a } from '@react-spring/three';
 
-import islandScene from '../assets/3d/island.glb';
+import { Group } from 'three';
 
-const Island = (props) => {
-  const islandRef = useRef();
+import islandScene from '../assets/3d/island.glb';
+import { useThree } from '@react-three/fiber';
+
+type IslandProps = JSX.IntrinsicElements['group'] & {
+  isRotating?: boolean;
+  setIsRotating?: (isRotating: boolean) => void;
+};
+
+const Island = ({ isRotating = false, ...props }: IslandProps) => {
+  const islandRef = useRef<Group>(null);
   const { nodes, materials } = useGLTF(islandScene);
+  const { gl, viewPort } = useThree();
+
+  const lastX = useRef(0);
+  const rotationSpeed = useRef(0);
+  const dampingFactor = 0.95;
   return (
     <a.group ref={islandRef} {...props}>
       <mesh
@@ -23,26 +35,18 @@ const Island = (props) => {
         material={materials.PaletteMaterial001}
       />
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.polySurface947_tree1_0.geometry}
         material={materials.PaletteMaterial001}
       />
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.polySurface948_tree_body_0.geometry}
         material={materials.PaletteMaterial001}
       />
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.polySurface949_tree_body_0.geometry}
         material={materials.PaletteMaterial001}
       />
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.pCube11_rocks1_0.geometry}
         material={materials.PaletteMaterial001}
       />
